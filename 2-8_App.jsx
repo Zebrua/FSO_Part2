@@ -30,7 +30,10 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     const copy = [...persons]
-    if (copy.find(({name}) => name === newName)) {
+     if (newName === "Arto Hellas") {
+      alert(`Arto Hellas is already added to phonebook.`)
+    }
+    else if (copy.find(({name}) => name === newName)) {
       alert(`${newName} is already added to phonebook.`)
     }
     else{
