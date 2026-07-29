@@ -25,7 +25,7 @@ const App = () => {
     event.preventDefault()
     const copy = [...persons]
     if (newName === "Arto Hellas") {
-      alert(`Arto Hellass is already added to phonebook.`)
+      alert(`Arto Hellas is already added to phonebook.`)
     }
     else if (copy.find(({name}) => name === newName)) {
       alert(`${newName} is already added to phonebook.`)
