@@ -1,6 +1,7 @@
 import { useState } from 'react'
 const Phonebook = (props) => {
-  if (props.filter === ""){
+  const filt = props.filter
+  if (filt === ""){
     const list = props.persons
     return(
       <div>
@@ -11,7 +12,7 @@ const Phonebook = (props) => {
     )
   }
   else{
-    const list = props.persons.filter(({name}) => name.includes(props.filter) === true)
+    const list = props.persons.filter(({name}) => name.toLowerCase().includes(filt.toLowerCase()) === true)
     return(
       <div>
         {list.map((person) => (
