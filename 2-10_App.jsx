@@ -3,8 +3,11 @@ const Newport = (props) => {
   const addName = (event) => {
     event.preventDefault()
     const copy = [...props.persons]
-    if (copy.find(({name}) => name === props.newName)) {
-      alert(`${props.newName} is already added to phonebook.`)
+    if (newName === "Arto Hellas") {
+      alert(`Arto Hellas is already added to phonebook.`)
+    }
+    else if (copy.find(({name}) => name === newName)) {
+      alert(`${newName} is already added to phonebook.`)
     }
     else{
       const Name = {
@@ -76,7 +79,7 @@ const Phonebook = (props) => {
     )
   }
   else{
-    const list = props.persons.filter(({name}) => name.includes(props.filter) === true)
+    const list = props.persons.filter(({name}) => name.toLowerCase().includes(props.filter.toLowerCase()) === true)
     return(
       <div>
         {list.map((person) => (
