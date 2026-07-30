@@ -1,25 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
-const createNew = (data) => {
-  const request = axios.post('http://localhost:3001/persons', data)
-  return request.then(response => response.data)
-}
-
-const getAll = () => {
-  const request = axios.get('http://localhost:3001/persons')
-  return request.then(response => response.data)
-}
-
-const removeAction = (id) => {
-  const request = axios.delete(`http://localhost:3001/persons/${id}`)
-  return window.location.replace('http://localhost:5173/')
-}
-
-const updateAction = (person) => {
-  const request = axios.put(`http://localhost:3001/persons/${person.id}`, person)
-  return window.location.replace('http://localhost:5173/')
-}
+import phonebook_service from "./services/phonebook"
 
 const Newport = (props) => {
   const addName = (event) => {
@@ -30,7 +11,7 @@ const Newport = (props) => {
       if (newcon === true){
         const Name = copy.find(({name}) => name === props.newName)
         Name.number = props.newNumber
-        updateAction(Name)
+        phonebook_service.updateAction(Name)
       }
     }
     else{
@@ -39,7 +20,7 @@ const Newport = (props) => {
         number: props.newNumber,
         id: String(props.persons.length + 1)
       }
-      createNew(Name)
+      phonebook_service.createNew(Name)
       copy.push(Name)
       props.setPersons(copy)
       props.setNewName("")
@@ -99,7 +80,7 @@ const Phonebook = (props) => {
         {list.map((person) => (
           <>
           <p key={person.id}>{person.name} {person.number}</p>
-          <button onClick={() => removeAction(person.id)}>Delete</button>
+          <button onClick={() => phonebook_service.removeAction(person.id)}>Delete</button>
           </>
         ))}
       </div>
@@ -123,7 +104,7 @@ const App = () => {
   const [filterName, setFilterName] = useState('')
   
   useEffect(() => {
-    getAll()
+    phonebook_service.getAll()
     .then(Persons => {
       setPersons(Persons)
     })
